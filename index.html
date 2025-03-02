@@ -253,10 +253,10 @@
                       <div class="">
                           <h4 class="text-indigo-600 text-base font-medium leading-6 mb-4 lg:text-left text-center">Contact Us</h4>
                           <h2 class="text-white font-manrope text-4xl font-semibold leading-10 mb-9 lg:text-left text-center">Reach Out To Us</h2>
-                          <form action="">
-                              <input type="text" class="w-full h-14 shadow-sm text-white placeholder-text-400 text-lg font-normal leading-7 rounded-full border border-gray-200 focus:outline-none py-2 px-4 mb-8" placeholder="Name">
-                              <input type="email" class="w-full h-14 shadow-sm text-white placeholder-text-400 text-lg font-normal leading-7 rounded-full border border-gray-200 focus:outline-none py-2 px-4 mb-8" placeholder="Email">
-                              <textarea name="" id="text" class="w-full text-white h-48 shadow-sm resize-none  placeholder-text-400 text-lg font-normal leading-7 rounded-2xl border border-gray-200 focus:outline-none px-4 py-4 mb-8" placeholder="Message"></textarea>
+                          <form id="contact-form" action="">
+                              <input type="text" name="user_name" class="w-full h-14 shadow-sm text-white placeholder-text-400 text-lg font-normal leading-7 rounded-full border border-gray-200 focus:outline-none py-2 px-4 mb-8" placeholder="Name">
+                              <input type="email" name="user_email" class="w-full h-14 shadow-sm text-white placeholder-text-400 text-lg font-normal leading-7 rounded-full border border-gray-200 focus:outline-none py-2 px-4 mb-8" placeholder="Email">
+                              <textarea name="message" id="text" class="w-full text-white h-48 shadow-sm resize-none  placeholder-text-400 text-lg font-normal leading-7 rounded-2xl border border-gray-200 focus:outline-none px-4 py-4 mb-8" placeholder="Message"></textarea>
                           <button class="w-full h-12 text-center text-white text-base font-semibold leading-6 rounded-full bg-indigo-600 shadow transition-all duration-700 hover:bg-indigo-800">Submit</button>
                           </form>
                       </div>
@@ -351,7 +351,28 @@
 
      </div>
 
-
+     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+     <script>
+      (function () {
+        emailjs.init("l494XHIruANfsj4Sd"); // Replace with your Public Key
+      })();
+    
+      document.getElementById("contact-form").addEventListener("submit", function (event) {
+        event.preventDefault();
+    
+        emailjs
+          .sendForm("service_vzg5syq", "template_e4sagvu", this)
+          .then(
+            function () {
+              alert("Message sent successfully!");
+              window.location.reload();
+            },
+            function (error) {
+              alert("Failed to send message: " + error.text);
+            }
+          );
+      });
+    </script>
      <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
 </body>
 </html>
